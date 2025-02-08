@@ -21,3 +21,11 @@ Router::addGroup('/api/v1/user/', function(){
         \App\Middleware\JwtMiddleware::class,
     ],
 ]);
+
+Router::addGroup('/api/v1/order/', function(){
+    Router::post('create', [UserController::class, 'details']);
+}, [
+    'middleware' => [
+        \App\Middleware\JwtMiddleware::class,
+    ],
+]);
