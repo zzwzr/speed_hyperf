@@ -14,6 +14,7 @@ namespace App\Controller;
 
 class IndexController extends AbstractController
 {
+    // 测试商品模块
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
