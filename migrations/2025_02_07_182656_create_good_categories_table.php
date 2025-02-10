@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('good_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->default('')->comment('分类名称');
             $table->string('slug')->default('')->comment('分类标识');
