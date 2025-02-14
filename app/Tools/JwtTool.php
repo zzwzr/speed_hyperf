@@ -72,6 +72,10 @@ class JwtTool
         if ($this->jwt->check()) {
             $token = strval($this->jwt->getToken());
 
+            // 获取存储的JWT无状态信息
+            // $payload = $this->jwt->parseToken()->getPayload();
+            // var_dump($payload->get('id'), $payload->get('name'));
+
             $user = $this->getUserFromCache($token);
 
             if ($user) {
@@ -105,7 +109,7 @@ class JwtTool
     {
         return "jwt_user_{$token}";
     }
-    
+
     /**
      * 刷新Token并返回新的Token。
      *

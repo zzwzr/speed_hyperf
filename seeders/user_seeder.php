@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Controller\LoginController;
+use App\Model\User;
 use Hyperf\Database\Seeders\Seeder;
 use Faker\Factory;
 
@@ -15,18 +15,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // https://github.com/fzaninotto/Faker
         $faker = Factory::create('zh_CN');
 
-        // 创建一些模拟数据
+        User::truncate();
+
         for ($i = 0; $i < 5; $i++) {
-            \App\Model\User::create([
-                'name' => $faker->name,
-                'mobile' => $faker->regexify('1[3-9]\d{9}'),
-                'password' => password_hash('123123', PASSWORD_BCRYPT),
-                'avatar' => $faker->imageUrl(100, 100),
-                'email' => $faker->email,
-                'gender' => $faker->randomElement(['男', '女', '未知']),
-                'is_verified' => $faker->randomElement([1, 2]),
+            User::create([
+                'name'          => $faker->name,
+                'mobile'        => $faker->regexify('1[3-9]\d{9}'),
+                'password'      => password_hash('123123', PASSWORD_BCRYPT),
+                'avatar'        => $faker->imageUrl(100, 100),
+                'email'         => $faker->email,
+                'gender'        => $faker->randomElement(['男', '女', '未知']),
+                'is_verified'   => $faker->randomElement([1, 2]),
                 'last_login_at' => $faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
             ]);
         }

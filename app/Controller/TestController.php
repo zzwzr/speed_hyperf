@@ -23,7 +23,7 @@ class TestController
     {
         $validated = $request->validated();
         // try {
-            
+
             // 添加权限
             // Enforcer::addPermissionForUser('4', '/user', 'read');
             // return new BaseResource(['a1' => 'aaa', 'a2' => 222, 'a3' => 333]);

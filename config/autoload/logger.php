@@ -82,4 +82,38 @@ return [
             ],
         ],
     ],
+    'order' => [
+        'handlers' => [
+            [
+                'class' => Monolog\Handler\RotatingFileHandler::class,
+                'constructor' => [
+                    'filename' => BASE_PATH . '/runtime/logs/order/info.log',
+                    'maxFiles' => 14,
+                    'level' => \Monolog\Level::Info,
+                ],
+                'formatter' => [
+                    'class' => \Monolog\Formatter\LineFormatter::class,
+                    'constructor' => [
+                        'format' => null,
+                        'dateFormat' => 'Y-m-d H:i:s',
+                        'allowInlineLineBreaks' => true,
+                    ],
+                ],
+            ],
+            [
+                'class' => Monolog\Handler\RotatingFileHandler::class,
+                'constructor' => [
+                    'filename' => BASE_PATH . '/runtime/logs/order/error.log',
+                    'level' => \Monolog\Level::Error,
+                ],
+                'formatter' => [
+                    'class' => \Monolog\Formatter\LineFormatter::class,
+                    'constructor' => [
+                        'dateFormat' => 'Y-m-d H:i:s',
+                        'appendNewline' => true,
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];
