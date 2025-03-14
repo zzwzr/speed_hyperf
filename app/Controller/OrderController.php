@@ -44,7 +44,6 @@ class OrderController
             }
             $user = json_decode(strval(\Hyperf\Context\Context::get('user')), true);
 
-
             $create = [
                 'order_no'          => bin2hex(random_bytes(16)),
                 'user_id'           => $user['id'],

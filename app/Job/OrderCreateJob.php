@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Job;
 
 use App\Controller\OrderController;
+use App\Logger\OrderLogger;
 use Hyperf\AsyncQueue\Job;
 
 class OrderCreateJob extends Job
@@ -19,6 +20,14 @@ class OrderCreateJob extends Job
 
     public function handle()
     {
-        OrderController::createRun($this->params);
+        try {
+            OrderLogger::info(json_encode($this->params));
+
+            OrderController::createRun($this->params);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            OrderLogger::error($th->getMessage());
+        }
     }
 }
