@@ -37,4 +37,8 @@ class Order extends Model
      * The attributes that should be cast to native types.
      */
     protected array $casts = ['id' => 'integer', 'user_id' => 'integer', 'status' => 'integer', 'payment_status' => 'integer', 'address_id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function items() {
+        return $this->hasMany(OrderItem::class, 'order_id', 'id');
+    }
 }

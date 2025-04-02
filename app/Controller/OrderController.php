@@ -51,7 +51,7 @@ class OrderController
                 'status'            => 1,
                 'payment_status'    => 1,
                 'address_id'        => $validated['address_id'],
-                'address_json'      => ['id' => 1, 'mobile' => 110, 'address' => '啊啊啊']
+                'address_json'      => ['id' => 1, 'mobile' => 13623311796, 'address' => '啊啊啊']
             ];
 
             $this->service->push(['order' => $create, 'iteams' => $insertAll]);
@@ -71,10 +71,13 @@ class OrderController
      */
     public static function createRun($params): void
     {
+        // $order = Order::create($params['order']);
+        // foreach ($params['iteams'] as $k => $v) {
+        //     $params['iteams'][$k]['order_id'] = $order->id;
+        // }
+        // OrderItem::insert($params['iteams']);
+
         $order = Order::create($params['order']);
-        foreach ($params['iteams'] as $k => $v) {
-            $params['iteams'][$k]['order_id'] = $order->id;
-        }
-        OrderItem::insert($params['iteams']);
+        $order->items()->createMany($params['iteams']);
     }
 }
