@@ -30,7 +30,7 @@ class OrderItem extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = [];
+    protected array $fillable = ['id', 'order_id', 'category_id', 'brand_id', 'goods_id', 'goods_name', 'goods_price', 'number', 'total_amount', 'created_at'];
 
     /**
      * The attributes that should be cast to native types.

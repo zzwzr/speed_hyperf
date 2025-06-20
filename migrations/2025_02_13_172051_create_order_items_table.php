@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('goods_id')->comment('商品ID');
             $table->string('goods_name')->comment('商品名称');
             $table->decimal('goods_price', 10, 2)->comment('商品单价');
-            $table->integer('quantity')->default(1)->comment('购买数量');
+            $table->integer('number')->default(1)->comment('购买数量');
             $table->decimal('total_amount', 10, 2)->comment('商品总金额');
             $table->timestamps();
             $table->softDeletes();

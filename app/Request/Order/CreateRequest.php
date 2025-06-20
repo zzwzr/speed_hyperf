@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
             'address_id'        => 'required',
             'goods'             => 'required|array',
             'goods.*.id'        => 'required|integer',
-            'goods.*.quantity'  => 'required|integer'
+            'goods.*.number'    => 'required|integer'
         ];
     }
 }

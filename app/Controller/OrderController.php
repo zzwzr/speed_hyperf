@@ -23,28 +23,28 @@ class OrderController
     {
         $validated = $request->validated();
         try {
-            $insertAll = [];
+            $iteams = [];
             $totalAmount = 0;
             foreach ($validated['goods'] as $k => $v) {
                 $good = Good::where('id', $v['id'])->first();
 
-                $itemTotalAmount = round($good->price * $v['quantity'], 2);
+                $itemTotalAmount = round($good->price * $v['number'], 2);
 
                 $totalAmount += $itemTotalAmount;
-                $insertAll[] = [
+                $iteams[] = [
                     // 'order_id' => ,
                     'category_id'   => $good->category_id,
                     'brand_id'      => $good->brand_id,
                     'goods_id'      => $v['id'],
                     'goods_name'    => $good->name,
                     'goods_price'   => $good->price,
-                    'quantity'      => $v['quantity'],
+                    'number'        => $v['number'],
                     'total_amount'  => $itemTotalAmount
                 ];
             }
             $user = json_decode(strval(\Hyperf\Context\Context::get('user')), true);
 
-            $create = [
+            $order = [
                 'order_no'          => bin2hex(random_bytes(16)),
                 'user_id'           => $user['id'],
                 'total_amount'      => round($totalAmount, 2),
@@ -54,7 +54,7 @@ class OrderController
                 'address_json'      => ['id' => 1, 'mobile' => 13623311796, 'address' => '啊啊啊']
             ];
 
-            $this->service->push(['order' => $create, 'iteams' => $insertAll]);
+            $this->service->push(['order' => $order, 'iteams' => $iteams]);
 
             return new BaseResource();
 

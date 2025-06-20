@@ -41,10 +41,10 @@ return [
             'formatter' => [
                 'class' => \Monolog\Formatter\LineFormatter::class,
                 'constructor' => [
-                    'format' => null,
+                    'format' => "[%datetime%] %level_name%: %message% [IP: %extra.ip%]\n",
                     'dateFormat' => 'Y-m-d H:i:s',
                     'allowInlineLineBreaks' => true,
-                ],
+                ]
             ],
         ],
     ],
