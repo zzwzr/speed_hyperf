@@ -40,11 +40,11 @@ RUN set -ex \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
 
-WORKDIR /var/www
-COPY . /var/www
+WORKDIR /opt/www
+COPY . /opt/www
 
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 8001
 
-ENTRYPOINT ["php", "/var/www/bin/hyperf.php", "start"]
+ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]

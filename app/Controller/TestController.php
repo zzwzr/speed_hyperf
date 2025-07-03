@@ -16,24 +16,41 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 // use Casbin\Enforcer;
 use Donjan\Casbin\Enforcer;
+use Hyperf\Context\ApplicationContext;
 
 class TestController
 {
-    public function test(RegisterRequest $request)
+    // public function test(RegisterRequest $request)
+    public function test(RequestInterface $request)
     {
-        $validated = $request->validated();
+        $uuid = $request->input('uuid');
+
+        if ($uuid) {
+            $container = ApplicationContext::getContainer();
+
+            $redis = $container->get(\Hyperf\Redis\Redis::class);
+
+            if ($redis->setnx($uuid, 'vv')) {
+                // echo "设置成功！\n";
+            } else {
+                // echo "键已存在！\n";
+            }
+        }
+        // echo "缺少键！\n";
+
+        // return new BaseResource();
         // try {
 
             // 添加权限
             // Enforcer::addPermissionForUser('4', '/user', 'read');
             // return new BaseResource(['a1' => 'aaa', 'a2' => 222, 'a3' => 333]);
 
-            $list = User::paginate();
+            // $list = User::paginate();
 
             // return (new IndexCollection($list))->toResponse();
 
             // 分页返回
-            return IndexResource::collection($list)->additional(resourceWith())->toResponse();
+            // return IndexResource::collection($list)->additional(resourceWith())->toResponse();
         // } catch (\Throwable $th) {
         //     // UserLogger::error($th->getMessage());
         //     throw new BaseException($th->getMessage());

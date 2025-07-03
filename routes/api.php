@@ -8,7 +8,7 @@ use App\Controller\TestController;
 use App\Controller\UserController;
 use Hyperf\HttpServer\Router\Router;
 
-Router::post('/api/v1/test', [TestController::class, 'test']);
+Router::get('/api/v1/test', [TestController::class, 'test']);
 
 Router::addGroup('/api/v1/user/', function(){
     Router::post('register', [LoginController::class, 'register']);
