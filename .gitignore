@@ -5,4 +5,4 @@ vendor/
 .env
 *.cache
 .vscode/
-.devcontainer
+.devcontainer/
